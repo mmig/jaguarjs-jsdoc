@@ -204,116 +204,66 @@ function buildNav(members, conf) {
     var nav = {};
 
     if (members.namespaces.length) {
-        var namespaces = [];
+        nav.Namespaces = buildSubNav(members.namespaces, 'namespace', conf);
+    }
 
-        _.each(members.namespaces, function (v) {
-            namespaces.push({
-                type: 'namespace',
-                longname: v.longname,
-                name: v.name,
-                displayName: conf['default'].displayNavLong? v.longname : v.name.replace(/\b(module|event):/g, ''),
-
-                url: helper.longnameToUrl[v.longname] || v.longname,
-                members: find({
-                    kind: 'member',
-                    memberof: v.longname
-                }),
-                methods: find({
-                    kind: 'function',
-                    memberof: v.longname
-                }),
-                typedefs: find({
-                    kind: 'typedef',
-                    memberof: v.longname
-                }),
-                interfaces: find({
-                    kind: 'interface',
-                    memberof: v.longname
-                }),
-                events: find({
-                    kind: 'event',
-                    memberof: v.longname
-                })
-            });
-        });
-        nav.Namespaces = namespaces;
+    if (members.interfaces.length) {
+        nav.Interfaces = buildSubNav(members.interfaces, 'interface', conf);
     }
 
     if (members.classes.length) {
-        var classes = [];
-
-        _.each(members.classes, function (v) {
-            classes.push({
-                type: 'class',
-                longname: v.longname,
-                name: v.name,
-                displayName: conf['default'].displayNavLong? v.longname : v.name.replace(/\b(module|event):/g, ''),
-
-                url: helper.longnameToUrl[v.longname] || v.longname,
-
-                members: find({
-                    kind: 'member',
-                    memberof: v.longname
-                }),
-                methods: find({
-                    kind: 'function',
-                    memberof: v.longname
-                }),
-                typedefs: find({
-                    kind: 'typedef',
-                    memberof: v.longname
-                }),
-                interfaces: find({
-                    kind: 'interface',
-                    memberof: v.longname
-                }),
-                events: find({
-                    kind: 'event',
-                    memberof: v.longname
-                })
-            });
-        });
-        nav.Classes = classes;
+        nav.Classes = buildSubNav(members.classes, 'class', conf);
     }
 
     if (members.modules.length) {
-        var modules = [];
-
-        _.each(members.modules, function(v) {
-            modules.push({
-                type: 'module',
-                longname: v.longname,
-                name: v.name,
-                displayName: conf['default'].displayNavLong? v.longname : v.name.replace(/\b(module|event):/g, ''),
-
-                url: helper.longnameToUrl[v.longname] || v.longname,
-
-                members: find({
-                    kind: 'member',
-                    memberof: v.longname
-                }),
-                methods: find({
-                    kind: 'function',
-                    memberof: v.longname
-                }),
-                typedefs: find({
-                    kind: 'typedef',
-                    memberof: v.longname
-                }),
-                interfaces: find({
-                    kind: 'interface',
-                    memberof: v.longname
-                }),
-                events: find({
-                    kind: 'event',
-                    memberof: v.longname
-                })
-            });
-        });
-        nav.Modules = modules;
+        nav.Modules = buildSubNav(members.modules, 'module', conf);
     }
 
     return nav;
+}
+
+/**
+ * create members list for kind (e.g. "class", "namespace"),
+ * for sub-heading in nav-bar
+ *
+ * @param {object} kindMembersList The members for the kind.
+ * @param {string} kind The kind name.
+ */
+function buildSubNav(kindMembersList, kind, conf) {
+    var list = [];
+
+    _.each(kindMembersList, function (v) {
+        list.push({
+            type: kind,
+            longname: v.longname,
+            name: v.name,
+            displayName: conf['default'].displayNavLong? v.longname : v.name.replace(/\b(module|event):/g, ''),
+
+            url: helper.longnameToUrl[v.longname] || v.longname,
+            members: find({
+                kind: 'member',
+                memberof: v.longname
+            }),
+            methods: find({
+                kind: 'function',
+                memberof: v.longname
+            }),
+            typedefs: find({
+                kind: 'typedef',
+                memberof: v.longname
+            }),
+            interfaces: find({
+                kind: 'interface',
+                memberof: v.longname
+            }),
+            events: find({
+                kind: 'event',
+                memberof: v.longname
+            })
+        });
+    });
+    return list;
+
 }
 
 
