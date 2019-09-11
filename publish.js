@@ -263,6 +263,10 @@ function buildNav(members, conf) {
                     kind: 'typedef',
                     memberof: v.longname
                 }),
+                interfaces: find({
+                    kind: 'interface',
+                    memberof: v.longname
+                }),
                 events: find({
                     kind: 'event',
                     memberof: v.longname
@@ -296,7 +300,7 @@ function buildNav(members, conf) {
                     kind: 'typedef',
                     memberof: v.longname
                 }),
-	            interfaces: find({
+                interfaces: find({
                     kind: 'interface',
                     memberof: v.longname
                 }),
