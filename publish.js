@@ -131,7 +131,7 @@ function generate(title, docs, filename, resolveLinks) {
         html = helper.resolveLinks(html); // turn {@link foo} into <a href="foodoc.html">foo</a>
 
         // Add a link target for external links @davidshimjs
-        html = html.toString().replace(/<a\s+([^>]*href\s*=\s*['"]*[^\s'"]*:\/\/)/ig, '<a target="_blank" $1');
+        html = html.toString().replace(/<a\s+([^>]*href\s*=\s*['"]*[^\s'"]*:\/\/)/ig, '<a target=\'_blank\' $1');
     }
 
     fs.writeFileSync(outpath, html, 'utf8');
@@ -200,15 +200,20 @@ function attachModuleSymbols(doclets, modules) {
  * @param {array<object>} members.events
  * @return {string} The HTML for the navigation sidebar.
  */
-function buildNav(members) {
-    var nav = [];
+function buildNav(members, conf) {
+    var nav = {};
 
     if (members.namespaces.length) {
+        var namespaces = [];
+
         _.each(members.namespaces, function (v) {
-            nav.push({
+            namespaces.push({
                 type: 'namespace',
                 longname: v.longname,
                 name: v.name,
+                displayName: conf['default'].displayNavLong? v.longname : v.name.replace(/\b(module|event):/g, ''),
+
+                url: helper.longnameToUrl[v.longname] || v.longname,
                 members: find({
                     kind: 'member',
                     memberof: v.longname
@@ -231,14 +236,54 @@ function buildNav(members) {
                 })
             });
         });
+        nav.Namespaces = namespaces;
     }
 
     if (members.classes.length) {
+        var classes = [];
+
         _.each(members.classes, function (v) {
-            nav.push({
+            classes.push({
                 type: 'class',
                 longname: v.longname,
                 name: v.name,
+                displayName: conf['default'].displayNavLong? v.longname : v.name.replace(/\b(module|event):/g, ''),
+
+                url: helper.longnameToUrl[v.longname] || v.longname,
+
+                members: find({
+                    kind: 'member',
+                    memberof: v.longname
+                }),
+                methods: find({
+                    kind: 'function',
+                    memberof: v.longname
+                }),
+                typedefs: find({
+                    kind: 'typedef',
+                    memberof: v.longname
+                }),
+                events: find({
+                    kind: 'event',
+                    memberof: v.longname
+                })
+            });
+        });
+        nav.Classes = classes;
+    }
+
+    if (members.modules.length) {
+        var modules = [];
+
+        _.each(members.modules, function(v) {
+            modules.push({
+                type: 'module',
+                longname: v.longname,
+                name: v.name,
+                displayName: conf['default'].displayNavLong? v.longname : v.name.replace(/\b(module|event):/g, ''),
+
+                url: helper.longnameToUrl[v.longname] || v.longname,
+
                 members: find({
                     kind: 'member',
                     memberof: v.longname
@@ -261,6 +306,7 @@ function buildNav(members) {
                 })
             });
         });
+        nav.Modules = modules;
     }
 
     return nav;
@@ -441,7 +487,7 @@ exports.publish = function(taffyData, opts, tutorials) {
     view.members = members; //@davidshimjs: To make navigation for customizing
 
     // once for all
-    view.nav = buildNav(members);
+    view.nav = buildNav(members, conf);
     attachModuleSymbols( find({ kind: ['class', 'function'], longname: {left: 'module:'} }),
         members.modules );
 
@@ -511,7 +557,8 @@ exports.publish = function(taffyData, opts, tutorials) {
             title: title,
             header: tutorial.title,
             content: tutorial.parse(),
-            children: tutorial.children
+            children: tutorial.children,
+            filename: filename
         };
 
         var tutorialPath = path.join(outdir, filename),
