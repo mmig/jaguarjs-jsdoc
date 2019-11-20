@@ -498,10 +498,10 @@ exports.publish = function(taffyData, opts, tutorials) {
                 generate('External: ' + myExternals[0].name, myExternals, helper.longnameToUrl[longname]);
             }
 
-	        var myInterfaces = helper.find(interfaces, {longname: longname});
-	        if (myInterfaces.length) {
-		        generate('Interface: ' + myInterfaces[0].name, myInterfaces, helper.longnameToUrl[longname]);
-	        }
+            var myInterfaces = helper.find(interfaces, {longname: longname});
+            if (myInterfaces.length) {
+                generate('Interface: ' + myInterfaces[0].name, myInterfaces, helper.longnameToUrl[longname]);
+            }
         }
     }
 

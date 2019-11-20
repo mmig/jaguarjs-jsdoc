@@ -40,31 +40,31 @@
 
 <table class="props">
     <thead>
-	<tr>
-		<?js if (props.hasName) {?>
-		<th>Name</th>
-		<?js } ?>
+    <tr>
+        <?js if (props.hasName) {?>
+        <th>Name</th>
+        <?js } ?>
 
-		<th>Type</th>
+        <th>Type</th>
 
-		<?js if (props.hasAttributes) {?>
-		<th>Attributes</th>
-		<?js } ?>
+        <?js if (props.hasAttributes) {?>
+        <th>Attributes</th>
+        <?js } ?>
 
-		<?js if (props.hasDefault) {?>
-		<th>Default</th>
-		<?js } ?>
+        <?js if (props.hasDefault) {?>
+        <th>Default</th>
+        <?js } ?>
 
-		<th class="last">Description</th>
-	</tr>
-	</thead>
+        <th class="last">Description</th>
+    </tr>
+    </thead>
 
-	<tbody>
-	<?js
+    <tbody>
+    <?js
         var self = this;
-	    props.forEach(function(prop) {
-	        if (!prop) { return; }
-	?>
+        props.forEach(function(prop) {
+            if (!prop) { return; }
+    ?>
 
         <tr>
             <?js if (props.hasName) {?>
@@ -106,6 +106,6 @@
             <?js } ?></td>
         </tr>
 
-	<?js }); ?>
-	</tbody>
+    <?js }); ?>
+    </tbody>
 </table>
