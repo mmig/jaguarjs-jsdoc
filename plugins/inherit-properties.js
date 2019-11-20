@@ -46,7 +46,7 @@ exports.handlers = {
             allDoclets[augmentName].properties.forEach(function (prop) {
               if (!properties[prop.name]) {
                 // Make a copy so we don't mutate the original property
-                prop = Object.assign(prop);
+                prop = Object.assign({}, prop);
                  // Add a value that a rendering template could use to show that
                  // the property was inherted from a parent.  Since that in turn
                  // could have been inherited, preserve a known value.
