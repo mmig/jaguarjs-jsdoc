@@ -1,13 +1,26 @@
 Jaguar.js template for JSDoc 3
 ---
-- [Jaguar.js](https://davidshimjs.github.io/jaguarjs/)
-- [Jaguar.js Documentations](https://davidshimjs.github.io/jaguarjs/doc/)
-- [JSDoc3](https://github.com/jsdoc3/jsdoc)
-- [JSDoc3 API Documentations](http://usejsdoc.org)
+- [ORIGINAL Jaguar.js](https://davidshimjs.github.io/jaguarjs/)
+- [ORIGINAL Jaguar.js Documentation](https://davidshimjs.github.io/jaguarjs/doc/)
+- [JSDoc3](https://github.com/jsdoc/jsdoc)
+- [JSDoc3 API Documentation](https://jsdoc.app)
+
+__forked from [davidshimjs/jaguarjs-jsdoc](https://github.com/davidshimjs/jaguarjs-jsdoc)__
+
+Improvements:
+ * [Jcardonadcdev/issue25 add modules to nav](https://github.com/mmig/jaguarjs-jsdoc/pull/1)
+ * [Typo: documentation is not plural](https://github.com/mmig/jaguarjs-jsdoc/pull/2)
+ * [Support includeDate config](https://github.com/mmig/jaguarjs-jsdoc/pull/3)
+ * [FIX render interfaces](https://github.com/mmig/jaguarjs-jsdoc/pull/4)
+ * [FIX revert visibility of items in navigation-bar correctly](https://github.com/mmig/jaguarjs-jsdoc/pull/5)
+ * [FIX render interfaces in nav-bar](https://github.com/mmig/jaguarjs-jsdoc/pull/6)
+ * PATCH avoid errors in JSON.stringified string-fields due to adding target-blank attributes to anchor tags
+ * added support for `templates.default.displayNavLong` (Boolean): make displayed name (long vs. short) in nav-bar configurable via option
+ * support for custom configuration option `templates.sourceLinks` (Boolean): if set to `false` suppress printing source-file/line information
 
 Usage
 ---
-1. If you want to create documentations with sample files, you can use commands below.
+1. If you want to create documentation with sample files, you can use commands below.
 ```
 $ npm install
 $ grunt demo
@@ -51,6 +64,4 @@ You can set options for customizing your documentation.
 
 License
 ---
-This project under the MIT License. and this project refered by default template for JSDoc 3.
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/davidshimjs/jaguarjs-jsdoc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+This project under the MIT License. Based on the default template of JSDoc 3.
