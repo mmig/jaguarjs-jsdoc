@@ -25,7 +25,7 @@ $ jsdoc -t `project folder` -c `configuration file` `source files` `README.md fi
 
 conf.json
 ---
-You can set options for customizing your documentations.
+You can set options for customizing your documentation.
 
 ```
 "templates": {
@@ -44,7 +44,8 @@ You can set options for customizing your documentations.
         "description": "",
         "keyword": ""
     },
-    "linenums": true
+    "linenums": true,
+    "sourceLinks": true
 }
 ```
 
@@ -53,4 +54,3 @@ License
 This project under the MIT License. and this project refered by default template for JSDoc 3.
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/davidshimjs/jaguarjs-jsdoc/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

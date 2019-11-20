@@ -11,7 +11,7 @@ var self = this;
             <?js= data.attribs + (kind === 'class' ? 'new ' : '') + (data.scope === 'static' ? longname : name) + (kind !== 'event' ? data.signature : '') ?>
         </h4>
     
-        <?js if (data.meta) {?>
+        <?js if (data.meta && env.conf.templates.sourceLinks !== false) {?>
         <div class="tag-source">
             <?js= self.linkto(meta.filename) ?>, <?js= self.linkto(meta.filename, 'line ' + meta.lineno, null, 'line' + meta.lineno) ?>
         </div>
