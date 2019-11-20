@@ -25,6 +25,7 @@
 			"keyword": ""
 		},
 		"linenums": false
+		"sourceLinks": true
 	},
 	"markdown": {
 		"parser": "gfm",

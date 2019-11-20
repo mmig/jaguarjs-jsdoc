@@ -45,7 +45,7 @@ You can set options for customizing your documentation.
         "keyword": ""
     },
     "linenums": true,
-    "sourceLinks": true
+    "sourceLinks": false
 }
 ```
 
