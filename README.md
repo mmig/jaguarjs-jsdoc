@@ -17,6 +17,7 @@ Improvements:
  * PATCH avoid errors in JSON.stringified string-fields due to adding target-blank attributes to anchor tags
  * added support for `templates.default.displayNavLong` (Boolean): make displayed name (long vs. short) in nav-bar configurable via option
  * support for custom configuration option `templates.sourceLinks` (Boolean): if set to `false` suppress printing source-file/line information
+ * added/included plugin for supporting inheritance of properties (e.g. via `@augments`)
 
 Usage
 ---
@@ -59,7 +60,10 @@ You can set options for customizing your documentation.
     },
     "linenums": true,
     "sourceLinks": false
-}
+},
+"plugins": [
+    "./node_modules/jaguarjs-jsdoc/plugins/inherit-properties"
+]
 ```
 
 License
